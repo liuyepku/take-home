@@ -33,5 +33,5 @@ for line in lines:
 
 
 
-print len(time_c2)
-print len(spend_c2)
+print time_c2
+print spend_c2
