@@ -35,9 +35,9 @@ for line in lines:
         # store value for plot campaign pacing
         if line[1] not in timeSet_c1:
             timeSet_c1[line[1]] = []
-            timeSet_c1[line[1]].append((line[0], line[2]))
+            timeSet_c1[line[1]].append((line[0], line[2], line[3]))
         else:
-            timeSet_c1[line[1]].append((line[0], line[2]))
+            timeSet_c1[line[1]].append((line[0], line[2], line[3]))
 
     if line[5] == 'VIDEO_VIEWS':
         cnt_c2+=1
@@ -50,9 +50,9 @@ for line in lines:
         # store value for plot campaign pacing
         if line[1] not in timeSet_c2:
             timeSet_c2[line[1]] = []
-            timeSet_c2[line[1]].append((line[0], line[2]))
+            timeSet_c2[line[1]].append((line[0], line[2], line[3]))
         else:
-            timeSet_c2[line[1]].append((line[0], line[2]))
+            timeSet_c2[line[1]].append((line[0], line[2], line[3]))
 
 print "the engagement rate of app install is {}".format(cnt_chg_c1*1.0/cnt_c1)
 print "the engagement rate of video view is {}".format(cnt_chg_c2*1.0/cnt_c2)
@@ -81,14 +81,14 @@ for attr in timeSet_c1:
         timeStr = str(timeStamp) + '.' + tmwords[1]
 
         time_c1.append(float(timeStr))
-        spend_c1.append(float(ts[1]))
+        spend_c1.append(float(ts[1])/float(ts[2]))
     x1 = np.array(time_c1)
     y1 = np.array(spend_c1)
     plt.plot(x1, y1, label='campaign ' + attr)
     plt.legend(loc='upper right')
 
 plt.xlabel("time")
-plt.ylabel("spend")
+plt.ylabel("spend/budget")
 
 
 plt.subplot(122)
@@ -104,12 +104,12 @@ for attr in timeSet_c2:
         timeStr = str(timeStamp) + '.' + tmwords[1]
 
         time_c2.append(float(timeStr))
-        spend_c2.append(float(ts[1]))
+        spend_c2.append(float(ts[1])/float(ts[2]))
     x2 = np.array(time_c2)
     y2 = np.array(spend_c2)
     plt.plot(x2, y2, label='campaign ' + attr)
     plt.legend(loc='upper right')
 
 plt.xlabel("time")
-plt.ylabel("spend")
+plt.ylabel("spend/budget")
 plt.show()

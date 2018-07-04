@@ -6,6 +6,7 @@ import numpy as np
 file = open('data/twitter_marketplace_data_5.csv', 'r')
 lines = csv.reader(file)
 head_row = next(lines)
+print head_row
 # for line in lines:
 #     print line
 
@@ -26,8 +27,9 @@ for line in lines:
         timeStamp = int(time.mktime(timeArray)) - timeShift
         timeStr = str(timeStamp) + '.' + tmwords[1]
 
+
         time_c1.append(float(timeStr))
-        spend_c1.append(float(line[2]))
+        spend_c1.append(float(line[2])/float(line[3]))
     if line[1] == '2':
         # print line
         tmwords = line[0].split('.')
@@ -36,7 +38,8 @@ for line in lines:
         timeStr = str(timeStamp) + '.' + tmwords[1]
 
         time_c2.append(float(timeStr))
-        spend_c2.append(float(line[2]))
+        spend_c2.append(float(line[2])/float(line[3]))
+
 
 plt.figure(1)
 plt.subplot(121)
